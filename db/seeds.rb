@@ -7,3 +7,13 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+Faker::Config.locale = 'pt-BR'
+
+10.times {
+  Contato.create(
+    nome: Faker::Name.name,
+    telefone: Faker::PhoneNumber.phone_number_with_country_code,
+    email: Faker::Internet.email
+  )
+}
