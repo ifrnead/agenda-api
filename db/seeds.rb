@@ -1,3 +1,5 @@
+require 'factory_bot_rails'
+
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
@@ -8,12 +10,4 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Faker::Config.locale = 'pt-BR'
-
-10.times {
-  Contato.create(
-    nome: Faker::Name.name,
-    telefone: Faker::PhoneNumber.phone_number_with_country_code,
-    email: Faker::Internet.email
-  )
-}
+4.times { FactoryBot.create(:contato) }
