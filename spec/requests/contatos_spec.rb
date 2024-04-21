@@ -21,12 +21,12 @@ RSpec.describe "/contatos", type: :request do
     context "com parâmetros válidos" do
       it "cria um novo contato" do
         expect {
-          post contatos_url, params: { contato: build(:contato) }, as: :json
+          post '/contatos', params: { contato: build(:contato) }, as: :json
         }.to change(Contato, :count).by(1)
       end
 
       it "responde com o JSON do novo contato" do
-        post contatos_url, params: { contato: build(:contato) }, as: :json
+        post '/contatos', params: { contato: build(:contato) }, as: :json
         expect(response).to have_http_status(:created)
         expect(response.content_type).to match(a_string_including("application/json"))
       end
@@ -35,12 +35,12 @@ RSpec.describe "/contatos", type: :request do
     context "com parâmetros inválidos" do
       it "não cria um novo contato" do
         expect {
-          post contatos_url, params: { contato: build(:contato, nome: '') }, as: :json
+          post '/contatos', params: { contato: build(:contato, nome: '') }, as: :json
         }.to change(Contato, :count).by(0)
       end
 
       it "responde com HTTP status 422 (Unprocessable entity)" do
-        post contatos_url, params: { contato: build(:contato, nome: '') }, as: :json
+        post '/contatos', params: { contato: build(:contato, nome: '') }, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to match(a_string_including("application/json"))
       end
